@@ -1,4 +1,10 @@
 body {
+	--shoro-max-width: 480px;
+	--shoro-columns-gutters: 8px;
+	--shoro-columns: 2;
+	--shoro-order-btn-width: 130px;
+	
+	
     font-family: var(--default-font);
     font-size: 13px;
     line-height: 16px;
@@ -50,7 +56,7 @@ body {
     transition: filter var(--animation);
   }
   body.closed .cafe-page {
-    filter: grayscale(1) opacity(0.7);
+    /*filter: grayscale(1) opacity(0.7);*/
   }
   
   .cafe-block {
@@ -63,8 +69,8 @@ body {
     display: flex;
     flex-wrap: wrap;
     margin: 0 auto;
-    max-width: 480px;
-    justify-content: space-around;
+    max-width: var(--shoro-max-width);
+    justify-content: space-between;
     align-content: flex-end;
     transition: max-height var(--page-animation), opacity var(--page-animation);
     background-color: var(--block-bg-color);
@@ -80,11 +86,16 @@ body {
   .cafe-item,
   .cafe-item-shadow {
     position: relative;
-    width: 120px;
-    height: 159px;
-    padding: 4px 5px 21px;
+    width: calc((var(--shoro-max-width) - var(--shoro-columns-gutters) * (var(--shoro-columns) - 1)) / var(--shoro-columns));
+    padding: 10px 5px 15px 5px;
     box-sizing: border-box;
     text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background: #f7f7f7;
+	border-radius: 8px;
+	margin-bottom: var(--shoro-columns-gutters);
   }
   .cafe-item-shadow {
     height: 0;
@@ -93,7 +104,7 @@ body {
   }
   .cafe-item-photo {
     position: relative;
-    height: 78px;
+    height: 100px;
   }
   .cafe-item-photo .cafe-item-emoji {
     font-size: 70px;
@@ -106,13 +117,14 @@ body {
     margin: 0 auto;
   }
   .cafe-item-photo .cafe-item-lottie {
-    width: 74px;
+    width: 100%;
+	height: 100%;
   }
-  .cafe-item-lottie:before {
+  /*.cafe-item-lottie:before {
     content: '';
     display: block;
     padding-top: 100%;
-  }
+  }*/
   .cafe-item-lottie img,
   .cafe-item-lottie canvas {
     position: absolute;
@@ -120,31 +132,24 @@ body {
     left: 0; right: 0;
     width: 100%;
     height: 100%;
+	object-fit: contain;
   }
   .cafe-item-label {
     display: flex;
-    justify-content: center;
+	  align-items: center;
+	  flex-direction: column
   }
   .cafe-item-title {
     font-weight: 500;
+	  margin-bottom: 3px;
   }
   .cafe-item-price {
     font-weight: 700;
     white-space: nowrap;
   }
-  .cafe-item-price:before {
-    display: inline-block;
-    vertical-align: top;
-    content: '';
-    width: 2px;
-    height: 2px;
-    border-radius: 2px;
-    background-color: currentColor;
-    margin: 7px 4px;
-  }
   .cafe-item-buttons {
     display: flex;
-    width: 80px;
+    width: var(--shoro-order-btn-width);
     justify-content: space-between;
     margin: 10px auto 0;
     position: relative;
@@ -189,7 +194,7 @@ body {
     top: 0;
     right: 0;
     transition: width var(--animation);
-    width: 80px;
+    width: var(--shoro-order-btn-width);
   }
   .selected .cafe-item-incr-button {
     width: 38px;
